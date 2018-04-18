@@ -1,0 +1,83 @@
+<footer class="footer">
+  <div class="footer-container container"
+    fxLayout="column"
+    fxLayoutAlign="start center">
+    <h3 class="footer-title" fxLayout="column" fxLayoutAlign="start center">
+      Got a project in mind?
+    </h3>
+    <div class="footer-text">
+      <div class="block-text">To support the project our developers core team is open to cooperation and ready to integrate Ngx-Restangular into your product. Feel free to drop us a message.
+      </div>
+      <p class="footer-notification" *ngIf="responseStatus">{{ responseText }}</p>
+    </div>
+
+    <div class="footer-form">
+      <form class="form" id="form"
+        #contactsForm="ngForm"
+        (ngSubmit)="onSubmit(contactsForm)"
+        method="post"
+        fxLayout="column"
+        fxLayoutAlign="start center">
+
+        <div class="form-row"
+          fxLayout="column"
+          fxLayoutAlign="start center"
+          fxLayout.gt-xs="row"
+          fxLayoutAlign="center center">
+          <div class="form-row__cell">
+            <input class="form-row__input" name="name"id="name" type="text" required
+              #name="ngModel"
+              [(ngModel)]="dataInfo.name"
+              (blur)="onEdit(name)">
+            <label class="form-row__label" for="name"
+              [style.opacity]="labels.hiddenLabelName ? '0' : '1'">
+              Your Name
+            </label>
+            <div class="form-row__alert" *ngIf="name.invalid && name.dirty">
+              Please fill in your name
+            </div>
+          </div>
+          <div class="form-row__cell">
+            <input class="form-row__input" id="email" name="email" type="email" required
+              #email="ngModel"
+              ngModel [email]="true"
+              [(ngModel)]="dataInfo.email"
+              (blur)="onEdit(email)">
+            <label class="form-row__label" for="email"
+              [style.opacity]="labels.hiddenLabelEmail ? '0' : '1'">
+              Your Email
+            </label>
+            <div class="form-row__alert" *ngIf="email.invalid && email.dirty">
+              <div *ngIf="email.errors.email">Please fill in your email</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxLayout="row" fxLayoutAlign="start center">
+          <div class="form-row__cell">
+            <div class="form-row__input-fake">{{ dataInfo.text }}</div>
+            <textarea class="form-row__textarea" name="message" id="message"
+              #msg="ngModel"
+              [(ngModel)]="dataInfo.text"
+              (blur)="onEdit(msg)"
+              required></textarea>
+            <label class="form-row__label form-row__label_position" for="message"
+              [style.opacity]="labels.hiddenLabelMsg ? '0' : '1'">
+              Message or question
+            </label>
+            <div class="form-row__alert form-row__alert_position" *ngIf="msg.invalid && msg.dirty">
+            Please fill in your message or question
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" fxLayout="row" fxLayoutAlign="center center">
+          <button [disabled]="!contactsForm.form.valid" class="form-row__submit btn" type="submit" form="form" value="submit" name="submit">Contact us</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</footer>
+
+
